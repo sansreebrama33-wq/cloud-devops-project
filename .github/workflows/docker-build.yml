@@ -1,15 +1,12 @@
-name: Docker Build and Push
+name: Docker Build and Deploy
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  docker-build:
+  docker-build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,3 +24,16 @@ jobs:
 
       - name: Push Docker image
         run: docker push sree2627/cloud-devops-project:latest
+
+      - name: Deploy to AWS EC2
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo docker pull sree2627/cloud-devops-project:latest
+            sudo docker stop cloud-devops-app || true
+            sudo docker rm cloud-devops-app || true
+            sudo docker run -d -p 80:80 --name cloud-devops-app sree2627/cloud-devops-project:latest
+            
