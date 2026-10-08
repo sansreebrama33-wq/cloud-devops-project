@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: cloud-devops-config
+  namespace: cloud-devops
+
+data:
+  APP_NAME: "Cloud DevOps Project"
+  ENVIRONMENT: "Kubernetes"
+

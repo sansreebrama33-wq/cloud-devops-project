@@ -24,4 +24,17 @@ spec:
 
           ports:
             - containerPort: 80
+          env:
+            - name: APP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: cloud-devops-config
+                  key: APP_NAME
+
+            - name: ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: cloud-devops-config
+                  key: ENVIRONMENT
+
 
