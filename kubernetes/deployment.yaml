@@ -24,6 +24,7 @@ spec:
 
           ports:
             - containerPort: 80
+
           env:
             - name: APP_NAME
               valueFrom:
@@ -36,6 +37,7 @@ spec:
                 configMapKeyRef:
                   name: cloud-devops-config
                   key: ENVIRONMENT
+
             - name: APP_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -48,6 +50,11 @@ spec:
                   name: cloud-devops-secret
                   key: APP_PASSWORD
 
+          volumeMounts:
+            - name: app-data
+              mountPath: /usr/share/nginx/html/data
 
-
+      volumes:
+        - name: app-data
+          emptyDir: {}
 
