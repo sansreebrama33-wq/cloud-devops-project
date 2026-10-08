@@ -56,5 +56,6 @@ spec:
 
       volumes:
         - name: app-data
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: cloud-devops-pvc
 
