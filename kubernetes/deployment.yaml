@@ -36,5 +36,18 @@ spec:
                 configMapKeyRef:
                   name: cloud-devops-config
                   key: ENVIRONMENT
+            - name: APP_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: cloud-devops-secret
+                  key: APP_USERNAME
+
+            - name: APP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cloud-devops-secret
+                  key: APP_PASSWORD
+
+
 
 
